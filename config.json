@@ -1,0 +1,16 @@
+{
+"portList": [
+{"portStr": "multiport sports 8388,", "name": "osum"},
+{"portStr": "tcp spt:8388", "name": "o8388"},
+{"portStr": "tcp spt:8391", "name": "o8391"},
+{"portStr": "tcp spt:8392", "name": "o8392"},
+{"portStr": "tcp spt:8393", "name": "o8393"},
+{"portStr": "tcp spt:8394", "name": "o8394"},
+{"portStr": "multiport dports 8388,", "name": "isum"},
+{"portStr": "tcp dpt:8388", "name": "i8388"},
+{"portStr": "tcp dpt:8391", "name": "i8391"},
+{"portStr": "tcp dpt:8392", "name": "i8392"},
+{"portStr": "tcp dpt:8393", "name": "i8393"},
+{"portStr": "tcp dpt:8394", "name": "i8394"}
+]
+}

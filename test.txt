@@ -1,0 +1,55 @@
+
+[root@coreos-512mb-sgp1-01-ding ~]# ifconfig eth0|grep -E "RX packets|TX packets"
+        RX packets 6923964  bytes 5932571044 (5.5 GiB)
+        TX packets 5425160  bytes 5654746333 (5.2 GiB)
+Chain INPUT (policy ACCEPT 4 packets, 164 bytes)
+ pkts bytes target     prot opt in     out     source               destination         
+ 347K  309M            tcp  --  *      *       0.0.0.0/0            0.0.0.0/0            tcp dpt:8394
+77322 5554K            tcp  --  *      *       0.0.0.0/0            0.0.0.0/0            tcp dpt:8393
+   16 17908            udp  --  *      *       0.0.0.0/0            0.0.0.0/0            multiport dports 500,4500
+ 134K   16M            tcp  --  *      *       0.0.0.0/0            0.0.0.0/0            tcp dpt:8392
+62344   12M            tcp  --  *      *       0.0.0.0/0            0.0.0.0/0            tcp dpt:8391
+ 2910  153K            tcp  --  *      *       0.0.0.0/0            0.0.0.0/0            tcp dpt:8390
+1969K  148M            tcp  --  *      *       0.0.0.0/0            0.0.0.0/0            tcp dpt:8388
+2592K  491M            tcp  --  *      *       0.0.0.0/0            0.0.0.0/0            multiport dports 8388,8390:8399
+4005K 5313M            tcp  --  *      *       0.0.0.0/0            0.0.0.0/0            multiport sports 80,443
+ 212K   20M f2b-SSH    tcp  --  *      *       0.0.0.0/0            0.0.0.0/0            tcp dpt:22
+   10   400 ACCEPT     tcp  --  *      *       0.0.0.0/0            0.0.0.0/0            tcp dpt:1723
+   20  4624 ACCEPT     47   --  *      *       0.0.0.0/0            0.0.0.0/0           
+ 7675  320K DROP       all  --  *      *       0.0.0.0/0            0.0.0.0/0            ctstate INVALID
+7777K 5895M ACCEPT     all  --  *      *       0.0.0.0/0            0.0.0.0/0            ctstate RELATED,ESTABLISHED
+   16 17908 ACCEPT     udp  --  *      *       0.0.0.0/0            0.0.0.0/0            multiport dports 500,4500
+    0     0 ACCEPT     udp  --  *      *       0.0.0.0/0            0.0.0.0/0            udp dpt:1701 policy match dir in pol ipsec
+   13  1755 DROP       udp  --  *      *       0.0.0.0/0            0.0.0.0/0            udp dpt:1701
+    0     0 ACCEPT     tcp  --  *      *       0.0.0.0/0            0.0.0.0/0            tcp dpt:1723
+    0     0 ACCEPT     47   --  *      *       0.0.0.0/0            0.0.0.0/0           
+
+Chain FORWARD (policy ACCEPT 0 packets, 0 bytes)
+ pkts bytes target     prot opt in     out     source               destination         
+    0     0 DROP       all  --  *      *       0.0.0.0/0            0.0.0.0/0            ctstate INVALID
+    0     0 ACCEPT     all  --  eth+   ppp+    0.0.0.0/0            0.0.0.0/0            ctstate RELATED,ESTABLISHED
+    0     0 ACCEPT     all  --  ppp+   eth+    0.0.0.0/0            0.0.0.0/0           
+    0     0 ACCEPT     all  --  ppp+   ppp+    192.168.42.0/24      192.168.42.0/24     
+    0     0 ACCEPT     all  --  eth+   *       0.0.0.0/0            192.168.43.0/24      ctstate RELATED,ESTABLISHED
+    0     0 ACCEPT     all  --  *      eth+    192.168.43.0/24      0.0.0.0/0           
+    0     0 DROP       all  --  *      *       0.0.0.0/0            0.0.0.0/0           
+    0     0 TCPMSS     tcp  --  *      *       172.16.36.0/24       0.0.0.0/0            tcp flags:0x17/0x02 TCPMSS set 1356
+
+Chain OUTPUT (policy ACCEPT 110 packets, 10588 bytes)
+ pkts bytes target     prot opt in     out     source               destination         
+ 283K  233M            tcp  --  *      *       0.0.0.0/0            0.0.0.0/0            tcp spt:8394
+93096  126M            tcp  --  *      *       0.0.0.0/0            0.0.0.0/0            tcp spt:8393
+   11  1020            udp  --  *      *       0.0.0.0/0            0.0.0.0/0            multiport sports 500,4500
+ 159K  149M            tcp  --  *      *       0.0.0.0/0            0.0.0.0/0            tcp spt:8392
+83757   89M            tcp  --  *      *       0.0.0.0/0            0.0.0.0/0            tcp spt:8391
+ 2910  116K            tcp  --  *      *       0.0.0.0/0            0.0.0.0/0            tcp spt:8390
+3204K 4493M            tcp  --  *      *       0.0.0.0/0            0.0.0.0/0            tcp spt:8388
+3825K 5091M            tcp  --  *      *       0.0.0.0/0            0.0.0.0/0            multiport sports 8388,8390:8399
+1212K  405M            tcp  --  *      *       0.0.0.0/0            0.0.0.0/0            multiport dports 80,443
+
+Chain f2b-SSH (1 references)
+ pkts bytes target     prot opt in     out     source               destination         
+   25  1856 REJECT     all  --  *      *       116.31.116.38        0.0.0.0/0            reject-with icmp-port-unreachable
+   21  1676 REJECT     all  --  *      *       111.3.64.249         0.0.0.0/0            reject-with icmp-port-unreachable
+  112  7148 REJECT     all  --  *      *       59.45.175.4          0.0.0.0/0            reject-with icmp-port-unreachable
+ 115K   13M RETURN     all  --  *      *       0.0.0.0/0            0.0.0.0/0           
