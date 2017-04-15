@@ -23,7 +23,7 @@ def writeLog(buf, fileName=""):
     timeStr = timeStr[timeStr.find(" "):].strip()
 
     log = timeStr + ": " + buf
-    print log
+    #print log
     with open(logFileName, "a") as fr:
         fr.write(log + "\n")
 

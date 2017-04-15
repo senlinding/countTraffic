@@ -62,7 +62,7 @@ def initConfig():
     global sysConfig
     with open(r"config.json") as configFile:
         sysConfig = json.load(configFile)
-        print sysConfig.keys()
+        #print sysConfig.keys()
 
         for i in sysConfig["portList"]:
             print "portStr[%s] name[%s]" % (i["portStr"], i["name"])
@@ -88,7 +88,7 @@ def countTraffic():
 
     while True:
         writeLog(getCurrTraffic())
-        sleep(10)
+        sleep(3600)
 
 if __name__ == '__main__':
     try:	
