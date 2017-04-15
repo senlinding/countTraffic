@@ -44,17 +44,17 @@ def getCurrTraffic():
     result = osSystem("ifconfig eth0|grep -E 'RX packets|TX packets'")
     start = result.find("(")
     end = result.find(")", start)
-    str = "%s%-10s" % (str, result[start + 1: end])
+    str = "%s%-8s" % (str, result[start + 1: end])
 
     start = result.find("(", end)
     end = result.find(")", start)
-    str = "%s%-10s" % (str, result[start + 1: end])
+    str = "%s%-8s" % (str, result[start + 1: end])
 
     result = osSystem("iptables -n -v -L -t filter")
     for port in sysConfig["portList"]:
         val = getPortTraffic(result, port["portStr"])
-        str = "%s%-10s" % (str, val)
-        print str
+        str = "%s%-8s" % (str, val)
+        #print str
 
     return str
 
@@ -81,9 +81,9 @@ def countTraffic():
     initConfig()
     initLogFile()
 
-    str = "%-10s%-10s" % ("RX", "TX")
+    str = "%-8s%-8s" % ("RX", "TX")
     for port in sysConfig["portList"]:
-        str = "%s%-10s" % (str, port["name"])
+        str = "%s%-8s" % (str, port["name"])
     writeLog(str)
 
     while True:

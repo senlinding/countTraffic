@@ -19,7 +19,10 @@ def writeLog(buf, fileName=""):
     if fileName != "":
         logFileName = fileName
 
-    log = str(ctime(time())) + ": " + buf
+    timeStr = str(ctime(time()))
+    timeStr = timeStr[timeStr.find(" "):].strip()
+
+    log = timeStr + ": " + buf
     print log
     with open(logFileName, "a") as fr:
         fr.write(log + "\n")
