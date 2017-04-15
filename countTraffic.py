@@ -87,7 +87,11 @@ def countTraffic():
     writeLog(str)
 
     while True:
-        writeLog(getCurrTraffic())
+        try:
+            writeLog(getCurrTraffic())
+        except:
+            writeLog("getCurrTraffic except")
+
         sleep(3600)
 
 if __name__ == '__main__':
