@@ -12,5 +12,6 @@
 {"portStr": "tcp dpt:8392", "name": "i8392"},
 {"portStr": "tcp dpt:8393", "name": "i8393"},
 {"portStr": "tcp dpt:8394", "name": "i8394"}
-]
+],
+"countSleepSec": "3600"
 }
