@@ -64,8 +64,7 @@ def getCurrTraffic():
     result = osSystem("iptables -n -v -L -t filter")
     for port in sysConfig["portList"]:
         val = getPortTraffic(result, port["portStr"])
-        str = "%s%-8s" % (str, val)
-        #print str
+        str = "%s%-8s" % (str, SimplifyString(val))
 
     return str
 
