@@ -2,12 +2,16 @@ import sys, os
 from time import *
 
 logFileName = ""
+
+def getTimeStr():
+    lt = localtime()
+    timeStr = "%04d%02d%02d %02d:%02d:%02d" % (lt.tm_year, lt.tm_mon, lt.tm_mday, lt.tm_hour, lt.tm_min, lt.tm_sec)
+    return timeStr
+
 def initLogFile():
     global logFileName
     if logFileName == "":
-        logFileName = (str(ctime(time())) + ".log").replace(' ', '_').replace(":", "")
-        start = logFileName.find("_")
-        logFileName = logFileName[start + 1:]
+        logFileName = (getTimeStr() + ".log").replace(' ', '_').replace(":", "")
 
     with open(logFileName, "w+") as fr:
         fr.write('log start time: ' + str(ctime(time())) + "\n")
@@ -19,16 +23,13 @@ def writeLog(buf, fileName=""):
     if fileName != "":
         logFileName = fileName
 
-    timeStr = str(ctime(time()))
-    timeStr = timeStr[timeStr.find(" "):].strip()
-
-    log = timeStr + ": " + buf
+    log = getTimeStr() + ": " + buf
     #print log
     with open(logFileName, "a") as fr:
         fr.write(log + "\n")
 
-'''
+
 if __name__ == '__main__':
     initLogFile()
     writeLog("test123")
-'''
+
