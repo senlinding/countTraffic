@@ -45,11 +45,11 @@ def getCurrTraffic():
     result = osSystem("ifconfig eth0|grep -E 'RX packets|TX packets'")
     start = result.find("(")
     end = result.find(")", start)
-    str = "%s%-8s" % (str, result[start + 1: end])
+    str = "%s%-10s" % (str, result[start + 1: end])
 
     start = result.find("(", end)
     end = result.find(")", start)
-    str = "%s%-8s" % (str, result[start + 1: end])
+    str = "%s%-10s" % (str, result[start + 1: end])
 
     result = osSystem("iptables -n -v -L -t filter")
     for port in sysConfig["portList"]:
