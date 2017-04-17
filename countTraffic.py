@@ -1,7 +1,7 @@
 #!/usr/bin/env python
 # -*- coding: utf-8 -*-
 #Python 2.7
-import sys, os, getopt, socket, struct, json
+import sys, os, getopt, socket, struct, json, re
 from log import *
 from time import *
 
@@ -38,6 +38,16 @@ def getPortTraffic(buf, portName):
 
     return ""
 
+#Simplify 1 GB/MB/KB to 1G/M/K
+def SimplifyString(str):
+    str = str.replace(" ", "")
+    endPos = len(str)
+    m = re.search('G|M|K', str, re.IGNORECASE)
+    if m != None:
+        endPos = m.start()
+
+    return str[:endPos + 1]
+
 def getCurrTraffic():
     global sysConfig
     str = ""
@@ -45,11 +55,11 @@ def getCurrTraffic():
     result = osSystem("ifconfig eth0|grep -E 'RX packets|TX packets'")
     start = result.find("(")
     end = result.find(")", start)
-    str = "%s%-8s" % (str, result[start + 1: end])
+    str = "%s%-8s" % (str, SimplifyString(result[start + 1: end]))
 
     start = result.find("(", end)
     end = result.find(")", start)
-    str = "%s%-8s" % (str, result[start + 1: end])
+    str = "%s%-8s" % (str, SimplifyString(result[start + 1: end]))
 
     result = osSystem("iptables -n -v -L -t filter")
     for port in sysConfig["portList"]:
